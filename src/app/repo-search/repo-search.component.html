@@ -1,0 +1,39 @@
+<div class="">
+<div class="row">
+    <div class="col-lg-6 col-s-10 pb-5" style="padding-left:100px;padding-right:100px;padding-top:50px">
+      <h3 class="pt-5 align-middle">Search and pick up a github repository !</h3>
+      <div class="input-group align-middle" >
+        <input type="text" class="form-control typeahead border-primary form-control-lg" id="keywordd" [formControl]="searchText" placeholder="Search for a repository..." autofocus />
+        <div class="input-group-append">
+           <button class="btn btn-primary bg-primary" id="btn1" style="color:white !important;" (click)="goSearching()">
+              <i class="fa fa-search"> Show All</i>
+           </button>
+        </div>
+      </div>
+      <ul class="list-group border-primary fb-font-primary">
+        <li *ngFor="let result of results" class="list-group-item filter-select-list" (click)="goToRepoDetails(result)">
+          <img src="{{result.owner.avatar_url}}" alt="" width="20" height="20">
+          <p class="repo-name">{{result.full_name}}</p>
+        </li>
+      </ul>
+    </div>
+    <div class="col-lg-6 col-s-10 pt-3">
+    <div class="card bg-white fb-border mb-3 fb-font-primary">
+      <div class="card-header bg-white  text-center">Search result</div>
+        <div class="card-body text-primary" style="min-height:450px;padding:0">
+          <ul class="list-group list-group-flush border-primary">
+            <li *ngFor="let searchResult of searchResults"  class="list-group-item filter-select-list" (click)="goToRepoDetails(searchResult)">
+              <img src="{{searchResult.owner.avatar_url}}" style="margin-right:3%" width="40" height="40">
+              <p class="repo-name">{{searchResult.full_name}}</p>
+            </li>
+          </ul>
+        </div>
+      <div class="card-footer bg-white text-center" style="padding-bottom: 0px">
+
+          <ngb-pagination class="d-flex justify-content-center fb-font-primary" (pageChange)="onPageChange($event)" [collectionSize]="totalCount" [(page)]="page" [maxSize]="3" [pageSize]="9" [rotate]="true" [boundaryLinks]="true"></ngb-pagination>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div>
